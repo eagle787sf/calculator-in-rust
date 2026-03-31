@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect x="8" y="4" width="48" height="56" rx="6" ry="6" fill="#3584e4"/>
+  <rect x="12" y="8" width="40" height="14" rx="3" ry="3" fill="#ffffff" opacity="0.9"/>
+  <text x="48" y="19" font-family="monospace" font-size="12" fill="#333" text-anchor="end">0</text>
+  <!-- Row 1 -->
+  <rect x="12" y="26" width="8" height="8" rx="2" fill="#ffffff" opacity="0.25"/>
+  <rect x="22" y="26" width="8" height="8" rx="2" fill="#ffffff" opacity="0.25"/>
+  <rect x="32" y="26" width="8" height="8" rx="2" fill="#ffffff" opacity="0.25"/>
+  <rect x="42" y="26" width="8" height="8" rx="2" fill="#63c7ff" opacity="0.6"/>
+  <!-- Row 2 -->
+  <rect x="12" y="36" width="8" height="8" rx="2" fill="#ffffff" opacity="0.25"/>
+  <rect x="22" y="36" width="8" height="8" rx="2" fill="#ffffff" opacity="0.25"/>
+  <rect x="32" y="36" width="8" height="8" rx="2" fill="#ffffff" opacity="0.25"/>
+  <rect x="42" y="36" width="8" height="8" rx="2" fill="#63c7ff" opacity="0.6"/>
+  <!-- Row 3 -->
+  <rect x="12" y="46" width="8" height="8" rx="2" fill="#ffffff" opacity="0.25"/>
+  <rect x="22" y="46" width="8" height="8" rx="2" fill="#ffffff" opacity="0.25"/>
+  <rect x="32" y="46" width="8" height="8" rx="2" fill="#ffffff" opacity="0.25"/>
+  <rect x="42" y="46" width="8" height="8" rx="2" fill="#63c7ff" opacity="0.6"/>
+</svg>

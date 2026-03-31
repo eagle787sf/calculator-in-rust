@@ -1,76 +1,111 @@
-# Calculator
-The Windows Calculator app is a modern Windows app written in C++ and C# that ships pre-installed with Windows.
-The app provides standard, scientific, and programmer calculator functionality, as well as a set of converters between various units of measurement and currencies.
+# COSMIC Calculator
 
-Calculator ships regularly with new features and bug fixes. You can get the latest version of Calculator in the [Microsoft Store](https://www.microsoft.com/store/apps/9WZDNCRFHVN5).
+A calculator application built with Rust and the [libcosmic](https://github.com/pop-os/libcosmic) toolkit for the [COSMIC desktop environment](https://github.com/pop-os/cosmic-epoch).
 
-[![Continuous Integration](https://github.com/microsoft/calculator/actions/workflows/action-ci.yml/badge.svg)](https://github.com/microsoft/calculator/actions/workflows/action-ci.yml)
-
-<img src="docs/Images/CalculatorScreenshot.png" alt="Calculator Screenshot" width="450px" />
+Works on **Ubuntu Linux** and **Pop!_OS COSMIC**.
 
 ## Features
-- Standard Calculator functionality which offers basic operations and evaluates commands immediately as they are entered.
-- Scientific Calculator functionality which offers expanded operations and evaluates commands using order of operations.
-- Programmer Calculator functionality which offers common mathematical operations for developers including conversion between common bases.
-- Date Calculation functionality which offers the difference between two dates, as well as the ability to add/subtract years, months and/or days to/from a given input date.
-- Calculation history and memory capabilities.
-- Conversion between many units of measurement.
-- Currency conversion based on data retrieved from [Bing](https://www.bing.com).
-- [Infinite precision](https://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic) for basic
-  arithmetic operations (addition, subtraction, multiplication, division) so that calculations
-  never lose precision.
 
-## Getting started
-Prerequisites:
-- Your computer must be running Windows 11, build 22000 or newer.
-- Install the latest version of [Visual Studio](https://developer.microsoft.com/en-us/windows/downloads) (the free community edition is sufficient).
-  - Install the "Universal Windows Platform Development" workload.
-  - Install the optional "C++ Universal Windows Platform tools" component.
-  - Install the latest Windows 11 SDK.
+- Standard arithmetic operations: addition, subtraction, multiplication, division
+- Parentheses for grouping expressions
+- Power/exponent operator
+- Square root function
+- Percentage (modulo) operator
+- Sign negation (+/-)
+- Full keyboard input support
+- Built-in expression evaluator (no external dependencies like `qalc`)
+- Native COSMIC desktop integration with theming support
+- Internationalization (i18n) ready
 
-  ![Visual Studio Installation Screenshot](docs/Images/VSInstallationScreenshot.png)
-- Install the [XAML Styler](https://marketplace.visualstudio.com/items?itemName=TeamXavalon.XAMLStyler) Visual Studio extension.
+## Screenshot Layout
 
-- Get the code:
-    ```
-    git clone https://github.com/Microsoft/calculator.git
-    ```
+```
++---------------------------------+
+|                Calculator       |
++---------------------------------+
+|                              0  |
++---------------------------------+
+|  (   )   sqrt   x^n            |
+|  C   %    /     <-              |
+|  7   8    9     x               |
+|  4   5    6     -               |
+|  1   2    3     +               |
+| +/- 0    .      =              |
++---------------------------------+
+```
 
-- Open [src\Calculator.sln](/src/Calculator.sln) in Visual Studio to build and run the Calculator app.
-- For a general description of the Calculator project architecture see [ApplicationArchitecture.md](docs/ApplicationArchitecture.md).
-- To run the UI Tests, you need to make sure that
-  [Windows Application Driver (WinAppDriver)](https://github.com/microsoft/WinAppDriver/releases/latest)
-  is installed.
+## Building
 
-## Contributing
-Want to contribute? The team encourages community feedback and contributions. Please follow our [contributing guidelines](CONTRIBUTING.md).
+### Prerequisites
 
-If Calculator is not working properly, please file a report in the [Feedback Hub](https://insider.windows.com/en-us/fb/?contextid=130).
-We also welcome [issues submitted on GitHub](https://github.com/Microsoft/calculator/issues).
+- Rust toolchain (1.75+): https://rustup.rs/
+- System dependencies for libcosmic/iced:
 
-## Roadmap
-For information regarding Windows Calculator plans and release schedule, please see the [Windows Calculator Roadmap](docs/Roadmap.md).
+**Ubuntu / Pop!_OS:**
+```bash
+sudo apt install build-essential pkg-config libwayland-dev libxkbcommon-dev \
+    libinput-dev libfontconfig1-dev libfreetype6-dev
+```
 
-### Graphing Mode
-Adding graphing calculator functionality [is on the project roadmap](https://github.com/Microsoft/calculator/issues/338) and we hope that this project can create a great end-user experience around graphing. To that end, the UI from the official in-box Windows Calculator is currently part of this repository, although the proprietary Microsoft-built graphing engine, which also drives graphing in Microsoft Mathematics and OneNote, is not. Community members can still be involved in the creation of the UI, however developer builds will not have graphing functionality due to the use of a [mock implementation of the engine](/src/GraphingImpl/Mocks) built on top of a
-[common graphing API](/src/GraphingInterfaces).
+### Setup
 
-## Diagnostic Data
-This project collects usage data and sends it to Microsoft to help improve our products and services.
-Read our [privacy statement](https://go.microsoft.com/fwlink/?LinkId=521839) to learn more.
-Diagnostic data is disabled in development builds by default, and can be enabled with the `SEND_DIAGNOSTICS`
-build flag.
+Run the setup script to vendor the required `cosmic-text` dependency:
 
-## Currency Converter
-Windows Calculator includes a currency converter feature that uses mock data in developer builds. The data that
-Microsoft uses for the currency converter feature (e.g., in the retail version of the application) is not licensed
-for your use. The mock data will be clearly identifiable as it references planets instead of countries,
-and remains static regardless of selected inputs.
+```bash
+./setup.sh
+```
 
-## Reporting Security Issues
-Please refer to [SECURITY.md](./SECURITY.md).
+### Build & Run
+
+```bash
+# Debug build
+cargo build
+
+# Release build
+cargo build --release
+
+# Run
+cargo run --release
+
+# Using just (if installed)
+just run
+```
+
+### Install
+
+```bash
+just install
+```
+
+This installs the binary, desktop entry, and icon to `/usr/local/`.
+
+### Uninstall
+
+```bash
+just uninstall
+```
+
+## Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| 0-9 | Number input |
+| + - * / | Operators |
+| . or , | Decimal point |
+| ( ) | Parentheses |
+| ^ | Power |
+| % | Modulo |
+| Enter | Evaluate |
+| Backspace | Delete last character |
+| Escape / Delete | Clear all |
+
+## Architecture
+
+- **`src/main.rs`** - Entry point, initializes i18n and COSMIC app settings
+- **`src/app.rs`** - COSMIC `Application` trait implementation with UI layout and event handling
+- **`src/calculator.rs`** - Math expression evaluator using the shunting-yard algorithm (tokenizer, parser, RPN evaluator)
+- **`src/i18n.rs`** - Internationalization module using Fluent
 
 ## License
-Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the [MIT License](./LICENSE).
+GPL-3.0

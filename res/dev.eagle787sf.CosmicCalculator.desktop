@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Calculator
+GenericName=Calculator
+Comment=Perform arithmetic, scientific, and other calculations
+Keywords=calculator;math;arithmetic;
+Exec=cosmic-calculator
+Icon=dev.eagle787sf.CosmicCalculator
+Terminal=false
+Type=Application
+Categories=Utility;Calculator;GTK;COSMIC;
+StartupNotify=true

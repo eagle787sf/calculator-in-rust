@@ -1,0 +1,28 @@
+[package]
+name = "cosmic-calculator"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0"
+description = "A calculator application for the COSMIC desktop environment"
+repository = "https://github.com/eagle787sf/calculator-in-rust"
+
+[dependencies]
+i18n-embed = { version = "0.14", features = ["fluent-system", "desktop-requester"] }
+i18n-embed-fl = "0.8"
+open = "5.3.0"
+rust-embed = "8.3.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+once_cell = "1.19"
+unic-langid = "0.9"
+
+[dependencies.libcosmic]
+git = "https://github.com/pop-os/libcosmic.git"
+rev = "380b341"
+default-features = false
+features = ["tokio", "winit", "about", "wayland"]
+
+# Pin cosmic-text to a compatible revision (before the breaking lazy setter API change).
+# The setup.sh script clones this automatically.
+[patch."https://github.com/pop-os/cosmic-text.git"]
+cosmic-text = { path = "vendor/cosmic-text" }
