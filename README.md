@@ -35,7 +35,7 @@ Works natively on **Ubuntu Linux** and **Pop!_OS COSMIC**.
 
 
 ```
-![Rust Calculator Screenshot](https://raw.githubusercontent.com/eagle787sf/calculator-in-rust/claude/cosmic-rust-calculator-mvpma/Screenshot_2026-03-30_22-27-45.png)
+
 
 
 ---
