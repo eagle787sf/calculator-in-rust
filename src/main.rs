@@ -1,5 +1,5 @@
 mod app;
-mod calculator;
+mod engine;
 mod i18n;
 
 fn main() -> cosmic::iced::Result {
