@@ -106,6 +106,12 @@ just uninstall
 - **`src/calculator.rs`** - Math expression evaluator using the shunting-yard algorithm (tokenizer, parser, RPN evaluator)
 - **`src/i18n.rs`** - Internationalization module using Fluent
 
+## Inspired By
+
+- [Microsoft Calculator](https://github.com/microsoft/calculator) - UI layout and feature set reference
+- [COSMIC Epoch](https://github.com/pop-os/cosmic-epoch) - Desktop environment and toolkit
+- [cosmic-utils/calculator](https://github.com/cosmic-utils/calculator) - Community COSMIC calculator
+
 ## License
 
 GPL-3.0
