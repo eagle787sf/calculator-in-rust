@@ -33,9 +33,10 @@ Works natively on **Ubuntu Linux** and **Pop!_OS COSMIC**.
 |  ±    0    .     =              |
 +---------------------------------+
 
-<img width="385" height="516" alt="image" src="https://github.com/user-attachments/assets/028c1c00-47ac-4831-97df-34fe97a42b3a" />
+<img width="385" height="516" alt="Screenshot_2026-03-30_22-27-45" src="https://github.com/user-attachments/assets/82f69cf4-30a7-4c01-847d-1691dfe20466" />
 
 ```
+
 
 ---
 
