@@ -1,116 +1,252 @@
 # COSMIC Calculator
 
-A calculator application built with Rust and the [libcosmic](https://github.com/pop-os/libcosmic) toolkit for the [COSMIC desktop environment](https://github.com/pop-os/cosmic-epoch).
+A calculator application built with **Rust** and the [libcosmic](https://github.com/pop-os/libcosmic) toolkit for the [COSMIC desktop environment](https://github.com/pop-os/cosmic-epoch).
 
-Works on **Ubuntu Linux** and **Pop!_OS COSMIC**.
+Works natively on **Ubuntu Linux** and **Pop!_OS COSMIC**.
 
 ## Features
 
 - Standard arithmetic operations: addition, subtraction, multiplication, division
 - Parentheses for grouping expressions
-- Power/exponent operator
-- Square root function
-- Percentage (modulo) operator
-- Sign negation (+/-)
+- Power/exponent operator (`^`)
+- Square root function (`√`)
+- Percentage (modulo) operator (`%`)
+- Sign negation (`+/-`)
 - Full keyboard input support
-- Built-in expression evaluator (no external dependencies like `qalc`)
-- Native COSMIC desktop integration with theming support
-- Internationalization (i18n) ready
+- Built-in expression evaluator using the shunting-yard algorithm (no external dependencies like `qalc`)
+- Native COSMIC desktop integration with automatic theming (light/dark)
+- Internationalization (i18n) ready with Fluent
 
 ## Screenshot Layout
 
 ```
 +---------------------------------+
-|                Calculator       |
+|            Calculator           |
 +---------------------------------+
 |                              0  |
 +---------------------------------+
-|  (   )   sqrt   x^n            |
-|  C   %    /     <-              |
-|  7   8    9     x               |
-|  4   5    6     -               |
-|  1   2    3     +               |
-| +/- 0    .      =              |
+|  (    )    √    x^n             |
+|  C    %    ÷     ⌫             |
+|  7    8    9     ×              |
+|  4    5    6     −              |
+|  1    2    3     +              |
+|  ±    0    .     =              |
 +---------------------------------+
 ```
 
-## Building
+---
 
-### Prerequisites
+## Installation Guide
 
-- Rust toolchain (1.75+): https://rustup.rs/
-- System dependencies for libcosmic/iced:
+### Ubuntu (22.04 / 24.04 / 24.10+)
 
-**Ubuntu / Pop!_OS:**
+#### Step 1: Install Rust
+
+If you don't have Rust installed yet:
+
 ```bash
-sudo apt install build-essential pkg-config libwayland-dev libxkbcommon-dev \
-    libinput-dev libfontconfig1-dev libfreetype6-dev
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
 ```
 
-### Setup
-
-Run the setup script to vendor the required `cosmic-text` dependency:
+Verify with:
 
 ```bash
+rustc --version   # should be 1.75 or higher
+cargo --version
+```
+
+#### Step 2: Install system dependencies
+
+```bash
+sudo apt update
+sudo apt install -y build-essential pkg-config cmake git \
+    libwayland-dev libxkbcommon-dev libinput-dev \
+    libfontconfig1-dev libfreetype6-dev libexpat1-dev
+```
+
+#### Step 3: Clone the repository
+
+```bash
+git clone https://github.com/eagle787sf/calculator-in-rust.git
+cd calculator-in-rust
+git checkout claude/cosmic-rust-calculator-mvpma
+```
+
+#### Step 4: Run the setup script
+
+This clones the required `cosmic-text` dependency at the correct version:
+
+```bash
+chmod +x setup.sh
 ./setup.sh
 ```
 
-### Build & Run
+#### Step 5: Build and run
 
 ```bash
-# Debug build
-cargo build
-
-# Release build
+# Build the release binary
 cargo build --release
 
-# Run
+# Run the calculator
 cargo run --release
-
-# Using just (if installed)
-just run
 ```
 
-### Install
+#### Step 6: Install system-wide (optional)
+
+Install `just` first (if not already installed):
 
 ```bash
-just install
+cargo install just
 ```
 
-This installs the binary, desktop entry, and icon to `/usr/local/`.
-
-### Uninstall
+Then install the calculator:
 
 ```bash
-just uninstall
+sudo just install
 ```
+
+This installs:
+- The binary to `/usr/bin/cosmic-calculator`
+- The desktop entry to `/usr/share/applications/`
+- The app icon to `/usr/share/icons/hicolor/scalable/apps/`
+
+After installing, you can launch it from your application menu or by running:
+
+```bash
+cosmic-calculator
+```
+
+To uninstall:
+
+```bash
+sudo just uninstall
+```
+
+---
+
+### Pop!_OS (COSMIC Edition)
+
+Pop!_OS with the COSMIC desktop is the primary target for this calculator. The steps are the same as Ubuntu with one difference: COSMIC system dependencies are likely already installed.
+
+#### Step 1: Install Rust
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+```
+
+#### Step 2: Install build dependencies
+
+```bash
+sudo apt update
+sudo apt install -y build-essential pkg-config cmake git \
+    libwayland-dev libxkbcommon-dev libinput-dev \
+    libfontconfig1-dev libfreetype6-dev libexpat1-dev
+```
+
+#### Step 3: Clone, setup, and build
+
+```bash
+git clone https://github.com/eagle787sf/calculator-in-rust.git
+cd calculator-in-rust
+git checkout claude/cosmic-rust-calculator-mvpma
+./setup.sh
+cargo build --release
+```
+
+#### Step 4: Install and launch
+
+```bash
+cargo install just
+sudo just install
+```
+
+The calculator will now appear in the **COSMIC App Launcher** as "Calculator" with its own icon. It automatically matches your COSMIC desktop theme (light or dark).
+
+You can also launch it from the terminal:
+
+```bash
+cosmic-calculator
+```
+
+---
+
+## Quick Start (TL;DR)
+
+```bash
+# Install Rust (if needed)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh && source "$HOME/.cargo/env"
+
+# Install system deps (Ubuntu / Pop!_OS)
+sudo apt install -y build-essential pkg-config cmake git libwayland-dev \
+    libxkbcommon-dev libinput-dev libfontconfig1-dev libfreetype6-dev libexpat1-dev
+
+# Clone, build, and run
+git clone https://github.com/eagle787sf/calculator-in-rust.git
+cd calculator-in-rust
+git checkout claude/cosmic-rust-calculator-mvpma
+./setup.sh
+cargo run --release
+```
+
+---
 
 ## Keyboard Shortcuts
 
 | Key | Action |
 |-----|--------|
-| 0-9 | Number input |
-| + - * / | Operators |
-| . or , | Decimal point |
-| ( ) | Parentheses |
-| ^ | Power |
-| % | Modulo |
-| Enter | Evaluate |
-| Backspace | Delete last character |
-| Escape / Delete | Clear all |
+| `0`-`9` | Number input |
+| `+` `-` `*` `/` | Operators |
+| `.` or `,` | Decimal point |
+| `(` `)` | Parentheses |
+| `^` | Power |
+| `%` | Modulo |
+| `Enter` | Evaluate expression |
+| `Backspace` | Delete last character |
+| `Escape` / `Delete` | Clear all |
 
 ## Architecture
 
-- **`src/main.rs`** - Entry point, initializes i18n and COSMIC app settings
-- **`src/app.rs`** - COSMIC `Application` trait implementation with UI layout and event handling
-- **`src/calculator.rs`** - Math expression evaluator using the shunting-yard algorithm (tokenizer, parser, RPN evaluator)
-- **`src/i18n.rs`** - Internationalization module using Fluent
+| File | Description |
+|------|-------------|
+| `src/main.rs` | Entry point — initializes i18n and COSMIC app settings |
+| `src/app.rs` | COSMIC `Application` trait implementation with UI grid layout and event handling |
+| `src/calculator.rs` | Math expression evaluator using the shunting-yard algorithm (tokenizer → parser → RPN evaluator) |
+| `src/i18n.rs` | Internationalization module using Fluent |
+| `i18n/en/cosmic_calculator.ftl` | English translations |
+| `justfile` | Build, install, and uninstall recipes |
+| `res/*.desktop` | Desktop entry for COSMIC/GNOME app launchers |
+| `res/icons/` | SVG application icon |
+| `setup.sh` | Vendor setup script for cosmic-text dependency |
+
+## Running Tests
+
+The math expression evaluator includes unit tests:
+
+```bash
+cargo test
+```
+
+```
+running 8 tests
+test calculator::tests::test_basic_operations ... ok
+test calculator::tests::test_decimal ... ok
+test calculator::tests::test_division_by_zero ... ok
+test calculator::tests::test_format_result ... ok
+test calculator::tests::test_power ... ok
+test calculator::tests::test_precedence ... ok
+test calculator::tests::test_sqrt ... ok
+test calculator::tests::test_unary_minus ... ok
+
+test result: ok. 8 passed; 0 failed
+```
 
 ## Inspired By
 
-- [Microsoft Calculator](https://github.com/microsoft/calculator) - UI layout and feature set reference
-- [COSMIC Epoch](https://github.com/pop-os/cosmic-epoch) - Desktop environment and toolkit
-- [cosmic-utils/calculator](https://github.com/cosmic-utils/calculator) - Community COSMIC calculator
+- [Microsoft Calculator](https://github.com/microsoft/calculator) — UI layout and feature set reference
+- [COSMIC Epoch](https://github.com/pop-os/cosmic-epoch) — Desktop environment and toolkit
+- [cosmic-utils/calculator](https://github.com/cosmic-utils/calculator) — Community COSMIC calculator
 
 ## License
 
