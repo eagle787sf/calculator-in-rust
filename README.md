@@ -70,6 +70,9 @@ The entire C++ CalcManager engine from Microsoft's open-source Windows Calculato
 +-------+-------+-------+-------+
 ```
 
+<img width="1024" height="780" alt="Screenshot From 2026-04-21 21-19-20" src="https://github.com/user-attachments/assets/b0374f0f-42e6-4d56-8a6a-6b3435a45401" />
+
+
 ### Scientific Mode
 
 ```
