@@ -56,6 +56,29 @@ Matches the original `CalculatorStandardOperators.xaml` from Windows Calculator:
 
 Tested on Ubuntu 22.04 LTS, 24.04 LTS, and 24.10+.
 
+### Easiest: Download the AppImage (no build required)
+
+A pre-built AppImage is available in the [`dist/` folder](https://github.com/eagle787sf/calculator-in-rust/tree/claude/cosmic-rust-calculator-mvpma/dist). AppImages run on any modern Linux distribution with no installation.
+
+```bash
+# Download (7.6 MB)
+wget https://github.com/eagle787sf/calculator-in-rust/raw/claude/cosmic-rust-calculator-mvpma/dist/CosmicCalculator-x86_64.AppImage
+
+# Make it executable
+chmod +x CosmicCalculator-x86_64.AppImage
+
+# Run it
+./CosmicCalculator-x86_64.AppImage
+```
+
+That's it — no Rust, no cargo, no build tools needed. The AppImage bundles everything except the standard Linux libraries (`libc`, `libm`, `libxkbcommon`) which are already on every Ubuntu/Pop!_OS system.
+
+> **Optional:** To have the AppImage appear in your app launcher, you can install [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher) or manually move it to `~/.local/bin/` and create a `.desktop` file.
+
+### Build from source
+
+If you'd rather build it yourself:
+
 ### Step 1: Install Rust
 
 ```bash
