@@ -94,6 +94,7 @@ The entire C++ CalcManager engine from Microsoft's open-source Windows Calculato
 |  CE   |   0   |   .   |   =   |   C   |
 +-------+-------+-------+-------+-------+
 ```
+<img width="1024" height="780" alt="image" src="https://github.com/user-attachments/assets/d66d3b3f-713d-4de0-9e71-6d9b90b0531c" />
 
 ---
 
