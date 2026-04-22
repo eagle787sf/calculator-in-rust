@@ -592,6 +592,15 @@ impl CalcEngine {
                 }
             }
 
+            // Angle mode commands (IDM_DEG=321, IDM_RAD=322, IDM_GRAD=323)
+            321 => self.angle_type = AngleType::Degrees,
+            322 => self.angle_type = AngleType::Radians,
+            323 => self.angle_type = AngleType::Gradians,
+
+            IDC_INV => {
+                self.is_inv = !self.is_inv;
+            }
+
             IDC_PNT => {
                 // Implicit multiplication after close paren
                 if self.last_com == IDC_CLOSEP {
